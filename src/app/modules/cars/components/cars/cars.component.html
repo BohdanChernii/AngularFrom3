@@ -1,0 +1,22 @@
+<div class="cars">
+
+  <form [formGroup]="form">
+    <input type="text" placeholder="model" formControlName="model">
+    <input type="text" placeholder="price" formControlName="price">
+    <input type="text" placeholder="year" formControlName="year">
+    <button (click)="save()" [disabled]="form.invalid" type="submit">{{updateCar ? 'update' : 'save'}}</button>
+  </form>
+
+
+  <span *ngIf="form.controls['model']['errors']">
+  {{form.controls['model']['errors']|json}}
+</span>
+  <span *ngIf="form.controls['price']['errors']">
+  {{form.controls['price']['errors']|json}}
+</span>
+  <span *ngIf="form.controls['year']['errors']">
+  {{form.controls['year']['errors']|json}}
+</span>
+
+  <app-car *ngFor="let car of cars" [car]="car" (updatedCar)="lift($event)"  (carIdForDelete)="deleteById($event)"></app-car>
+</div>
